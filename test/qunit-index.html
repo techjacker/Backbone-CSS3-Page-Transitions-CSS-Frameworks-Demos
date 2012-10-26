@@ -1,0 +1,40 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Qunit Test Suite</title>
+	<link rel="stylesheet" href="lib/qunit/qunit.css">
+	<link rel="stylesheet" href="../app/scripts/vendor/backbone.responsive3dtransitions.css">
+</head>
+<body>
+	<!-- QUnit stucture -->
+	<div class="dataset-test">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+	</div>
+
+	<div id="qunit-fixture">
+		<div id="target" class="threeDTrans-wrap-me"></div>
+	</div>
+
+
+	<!-- Testing libs -->
+	<script src="lib/qunit/qunit.js"></script>
+	<!--
+	<script src="lib/sinon/sinon-1.4.2.js"></script>
+	<script src="lib/sinon/sinon-qunit-1.0.0.js"></script>
+	-->
+	<script src="../app/scripts/vendor/jquery.min.js"></script>
+	<script src="../app/scripts/vendor/lodash.min.js"></script>
+	<script src="../app/scripts/vendor/backbone-min.js"></script>
+	<script src="../app/scripts/vendor/backbone.responsive3dtransitions.js"></script>
+	<script src="runner/qunit.js"></script>
+	<script>
+		TestRunnerQunit.run();
+	</script>
+
+
+</body>
+</html>
