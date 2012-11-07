@@ -1,16 +1,16 @@
 # Demo Code for CSS Frameworks using the Backbone Responsive 3d Page Transitions plugin
 
-### [Download the Plugin](https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions)
-Available to download from the [github repo](https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions).
+### [Download the Plugin](https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions)
+Available to download from the [github repo](https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions).
 
-### [CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions)
+### [CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 Includes working examples for:
 - twitter bootstrap
 - foundation
 - skeleton
 - simplegrid
 
-[See the demos in action](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions) @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions)
+[See the demos in action](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 
 ### Running the Demos Locally
 Navigate to project root dir in your terminal and type:
