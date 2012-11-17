@@ -5,20 +5,20 @@
 		<div class="eight columns">
 			<h1><a href="http://foundation.zurb.com/">Foundation</a> Demo</h1>
 			<h5>
-				 Back toBackbone Responsive 3d Page Transitions <a href="#backbone-responsive-3d-page-transitions">project homepage &raquo;</a>
+				 Back toBackbone Responsive 3d Page Transitions <a href="#backbone-responsive-CSS3-page-transitions">project homepage &raquo;</a>
 			</h5>
 
 
 			<div class="row">
 				<div class="six columns">
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/" class="small button">Click Me</a></p>
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/deep" class="button">Click Me</a></p>
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/deep/deeper" class="large button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/" class="small button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/deep" class="button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/deep/deeper" class="large button">Click Me</a></p>
 				</div>
 				<div class="six columns">
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/" class="small alert button">Click Me</a></p>
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/deep" class="success button">Click Me</a></p>
-					<p><a href="#backbone-responsive-3d-page-transitions/foundation/deep/deeper" class="large secondary button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/" class="small alert button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/deep" class="success button">Click Me</a></p>
+					<p><a href="#backbone-responsive-CSS3-page-transitions/foundation/deep/deeper" class="large secondary button">Click Me</a></p>
 				</div>
 			</div>
 

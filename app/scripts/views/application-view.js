@@ -1,6 +1,6 @@
 agoProjectsBb3dPageTransitions.Views.applicationView = Backbone.View.extend({
 
-	className: 'wrapper container-fluid homepage-bb-3d-page-transitions',
+	className: 'wrapper container-fluid homepage-bb-CSS3-page-transitions',
 
 	template: 'application.tpl',
 

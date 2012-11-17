@@ -1,0 +1,55 @@
+/*!
+ * backbone.responsiveCSS3transitionsiScrollPlugin v0.1.0
+ * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions-iScroll-Plugin.git
+ *
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions-iScroll-Plugin
+ *
+ * Copyright 2012, Andrew Griffiths
+ * Released under a MIT license
+ *
+ * Date: 2012-11-16
+ */
+
+.iscroll-body {
+    position: static !important; /*foundation fix*/
+    overflow: hidden;
+    padding:0;
+}
+
+.iscroll-body .threeDTrans .threeDTrans-page-container {
+	overflow-y: auto;
+}
+
+.iscroll-body .threeDTrans .threeDTrans-page-container-backwards {
+	overflow-y: visible;
+}
+
+	/*width: 100%;*/
+.iscroll-body #iscroll-wrapper {
+	position: absolute;
+	top:0;
+	bottom:0;
+	left: 0;
+	right: 0;
+}
+
+/*#scroll-main ~div {*/
+.iscroll-body .hideSiblings #scroll-main ~div {
+	opacity:0 !important;
+}
+
+
+.iscroll-body #scroll-main {
+	position: absolute;
+	width: 100%;
+}
+
+.op-zero {
+	opacity: 0 !important; /*hide scrollbar during animation*/
+}
+
+.myScrollbarOutside {
+	/*right:-18px !important;*/
+	opacity:0;
+}

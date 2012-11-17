@@ -1,4 +1,4 @@
-agoProjectsBb3dPageTransitions.Routers.ApplicationRouter = backboneResponsive3dTransitions.extend({
+agoProjectsBb3dPageTransitions.Routers.ApplicationRouter = backboneResponsiveCSS3Transitions.extend({
 
 	initialize: function (opts) {
 		this.options = opts;

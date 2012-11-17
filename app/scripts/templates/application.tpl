@@ -12,7 +12,7 @@
 			<h5>Manually set animation direction or rely on the inbuilt mechanism (auto detects direction base on url directory depth)</h5>
 			<!-- <h5>Works on Android 2.1+, iPhone, iPad, Chrome 12+, Safari 6+</h5> -->
 			<br>
-			<!-- <h5><a href="https://github.com/techjacker/backbone-responsive-3d-page-transitions">Grab the code from github</a></h5> -->
+			<!-- <h5><a href="https://github.com/techjacker/backbone-responsive-CSS3-page-transitions">Grab the code from github</a></h5> -->
 			<h5><a href="https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions">Full documentation</a> on github</h5>
 			<h5>Grab the code used for the CSS framework demos from <a href="https://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos">github &raquo;</a></h5>
 			<div class="row-fluid">
@@ -34,21 +34,21 @@
 		<div class="span12">
 
 			<div class="span6">
-				<h3><a href="#backbone-responsive-3d-page-transitions/skeleton">skeleton demo</a></h3>
-					<a href="#backbone-responsive-3d-page-transitions/skeleton">
+				<h3><a href="#backbone-responsive-CSS3-page-transitions/skeleton">skeleton demo</a></h3>
+					<a href="#backbone-responsive-CSS3-page-transitions/skeleton">
 						<img src="images/demos-screengrabs/jpgs/skeleton-big.jpg" alt="skeleton backbone responsive 3d page transitions demo">
 					</a>
 				<p>
-					<a class="btn" href="#backbone-responsive-3d-page-transitions/skeleton">View demo &raquo;</a>
+					<a class="btn" href="#backbone-responsive-CSS3-page-transitions/skeleton">View demo &raquo;</a>
 				</p>
 			</div><!--/span-->
 			<div class="span6">
-				<h3><a href="#backbone-responsive-3d-page-transitions/twitter-bootstrap">twitter bootstrap demo</a></h3>
-					<a href="#backbone-responsive-3d-page-transitions/twitter-bootstrap">
+				<h3><a href="#backbone-responsive-CSS3-page-transitions/twitter-bootstrap">twitter bootstrap demo</a></h3>
+					<a href="#backbone-responsive-CSS3-page-transitions/twitter-bootstrap">
 						<img src="images/demos-screengrabs/jpgs/twitter-bootstrap-big.jpg" alt="twitter bootstrap backbone responsive 3d page transitions demo">
 					</a>
 				<p>
-					<a class="btn" href="#backbone-responsive-3d-page-transitions/twitter-bootstrap">View demo &raquo;</a>
+					<a class="btn" href="#backbone-responsive-CSS3-page-transitions/twitter-bootstrap">View demo &raquo;</a>
 				</p>
 			</div><!--/span-->
 
@@ -57,21 +57,21 @@
 
 		<div class="span12">
 			<div class="span6">
-				<h3><a href="#backbone-responsive-3d-page-transitions/foundation">foundation demo</a></h3>
-					<a href="#backbone-responsive-3d-page-transitions/foundation">
+				<h3><a href="#backbone-responsive-CSS3-page-transitions/foundation">foundation demo</a></h3>
+					<a href="#backbone-responsive-CSS3-page-transitions/foundation">
 						<img src="images/demos-screengrabs/jpgs/foundation-big.jpg" alt="foundation backbone responsive 3d page transitions demo">
 					</a>
 				<p>
-					<a class="btn" href="#backbone-responsive-3d-page-transitions/foundation">View demo &raquo;</a>
+					<a class="btn" href="#backbone-responsive-CSS3-page-transitions/foundation">View demo &raquo;</a>
 				</p>
 			</div><!--/span-->
 			<div class="span6">
-				<h3><a href="#backbone-responsive-3d-page-transitions/simplegrid">simplegrid demo</a></h3>
-					<a href="#backbone-responsive-3d-page-transitions/simplegrid">
+				<h3><a href="#backbone-responsive-CSS3-page-transitions/simplegrid">simplegrid demo</a></h3>
+					<a href="#backbone-responsive-CSS3-page-transitions/simplegrid">
 						<img src="images/demos-screengrabs/jpgs/simplegrid-big.jpg" alt="simplegrid backbone responsive 3d page transitions demo">
 					</a>
 				<p>
-					<a class="btn" href="#backbone-responsive-3d-page-transitions/simplegrid">View demo &raquo;</a>
+					<a class="btn" href="#backbone-responsive-CSS3-page-transitions/simplegrid">View demo &raquo;</a>
 				</p>
 			</div><!--/span-->
 		</div><!--/span-->

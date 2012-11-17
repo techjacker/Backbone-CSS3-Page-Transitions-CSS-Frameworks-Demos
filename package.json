@@ -1,21 +1,21 @@
 {
-  "name": "backbone.responsive3dtransitions.demos",
-  "title": "Responsive CSS Frameworks Demos - using the Backbone Responsive 3d Page Transitions plugin",
-  "description": "Demos of using  the Backbone Responsive 3d Page Transitions Plugin with the major responsive CSS Frameworks (twitter bootstrap, foundation, skeleton, simplegrid)",
-  "version": "0.1.0",
-  "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions",
+  "name": "backbone.responsiveCSS3transitions.demos",
+  "title": "Responsive CSS Frameworks Demos - using the Backbone Responsive CSS3 Page Transitions plugin",
+  "description": "Demos of using  the Backbone Responsive CSS3 Page Transitions Plugin with the major responsive CSS Frameworks (twitter bootstrap, foundation, skeleton, simplegrid)",
+  "version": "0.2.0",
+  "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions",
   "author": "Andrew Griffiths",
   "repository": {
     "type": "git",
-    "url": "git://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos.git"
+    "url": "git://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos.git"
   },
   "bugs": {
-    "url": "https://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos/issues"
+    "url": "https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos/blob/master/LICENSE-MIT"
+      "url": "https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {

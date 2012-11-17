@@ -1,4 +1,4 @@
-# Demo Code for CSS Frameworks using the Backbone Responsive 3d Page Transitions plugin
+# Demo Code for CSS Frameworks using the Backbone Responsive CSS3 Page Transitions plugin
 
 ### [Download the Plugin](https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions)
 Available to download from the [github repo](https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions).
@@ -11,6 +11,10 @@ Includes working examples for:
 - simplegrid
 
 [See the demos in action](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
+
+###  Versions included in this repo
+- v0.3.1 - Backbone-Responsive-CSS3-Page-Transitions
+- v0.1.0 - Backbone-Responsive-CSS3-Page-Transitions-iScroll
 
 ### Running the Demos Locally
 Navigate to project root dir in your terminal and type:
@@ -29,4 +33,4 @@ Navigate to project root dir in your terminal and type:
 	// run built dir server @ http://localhost:3501/
 	$ yeoman server:dist
 
-Then open [http://localhost:3501/#backbone-responsive-3d-page-transitions](http://localhost:3501/#backbone-responsive-3d-page-transitions) in your browser.
+Then open [http://localhost:3501/](http://localhost:3501/) in your browser.

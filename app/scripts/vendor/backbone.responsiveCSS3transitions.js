@@ -1,14 +1,14 @@
 /*!
- * backbone.responsive3dtransitions v0.1.0
- * git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git
+ * backbone.responsiveCSS3transitions v0.3.1
+ * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
- * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions
- * Documentation: https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions
  *
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license
  *
- * Date: 2012-10-26
+ * Date: 2012-11-16
  */
 
 /*jslint nomen: true, plusplus: false, sloppy: true, white:true*/
@@ -21,9 +21,11 @@
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define(['backbone'], factory);
+		// if using fastclick then replace the line above with this
+		// define(['backbone', 'fastclick'], factory);
 	} else {
 		// Browser globals
-		root.backboneResponsive3dTransitions = factory(root.Backbone);
+		root.backboneResponsiveCSS3Transitions = factory(root.Backbone);
 	}
 }(this, function (Backbone) {
 
@@ -31,13 +33,15 @@
 
 		var threeDRouter = function (options) {
 
-			_(this).bindAll('pageTransitionAnimation', 'calculateDirection', 'triggerTransition', 'resetCssOutmostDiv', 'calculateCssOutmostDiv', 'clearUpAfterTransition');
+			_(this).bindAll('pageTransitionAnimation', 'insertNewPageDefault', 'calculateDirection', 'triggerTransition', 'resetCssContainers', 'setPagePreAnimationStyles', 'clearUpAfterTransition', 'setOutmostContainerPreAnimationStyles');
 
 			if (options) {
 				this.wrapElement = options.wrapElement;
 				this.renderCallback = options.renderCallback;
+				this.fastClick = options.fastClick;
 			}
 			this.callBackCounter = 0;
+			this.debugCounter = 0;
 			this.threeDEnabled = this.csstransforms3d();
 			this.domSetUp();
 
@@ -46,7 +50,7 @@
 
 		_.extend(threeDRouter.prototype, Backbone.Router.prototype, {
 
-			calculateCssOutmostDiv: function ($page, windowWidth, percentage) {
+			setOutmostContainerPreAnimationStyles: function ($page, windowWidth) {
 
 				(($page instanceof jQuery) || ($page = $(this.wrapElement)));
 
@@ -58,45 +62,46 @@
 
 				// calculate width and margins to transfer to outermost container
 				var pageWidth   = parseInt($page.css('width'), 10),
-				pageMarginRight = parseInt($page.css('margin-right'), 10),
-				pageMarginLeft  = parseInt($page.css('margin-left'), 10),
 				pageMinWidth    = parseInt($page.css('min-width'), 10),
-				pageMaxWidth    = parseInt($page.css('max-width'), 10);
+				pageMaxWidth    = parseInt($page.css('max-width'), 10),
+				pageMarginRight = parseInt($page.css('margin-right'), 10),
+				pageMarginLeft  = parseInt($page.css('margin-left'), 10);
 
 				// for browsers that return the value set in the stylesheet (not the acutal one)
 				if ((!pageMarginRight && !pageMarginLeft) && (windowWidth !== pageWidth)) {
 					pageMarginRight = pageMarginLeft = Math.abs((windowWidth - pageWidth) / 2);
 				}
-				this.trigger('threeDTrans.calculatedCssOutmostDiv');
 
-				if (percentage === true) {
-					this.cssOutmostDiv = {
-						"width": (pageWidth / windowWidth * 100) + "%",
-						"margin-right": (pageMarginRight / windowWidth * 100) + "%",
-						"margin-left": (pageMarginLeft  / windowWidth * 100) + "%",
-						"min-width": pageMinWidth,
-						"max-width": pageMaxWidth
-					};
-				} else {
-					this.cssOutmostDiv = {
-						"width": pageWidth,
-						"margin-right": pageMarginRight,
-						"margin-left": pageMarginLeft,
-						"min-width": pageMinWidth,
-						"max-width": pageMaxWidth
-					};
-				}
+				this.cssOutmostDiv = {
+					"height": $(window).height(),
+					"width": pageWidth,
+					"margin-right": pageMarginRight,
+					"margin-left": pageMarginLeft,
+					"min-width": pageMinWidth,
+					"max-width": pageMaxWidth
+				};
+
+				this.$outmostContainer.css(this.cssOutmostDiv);
+
+				this.trigger('threeDTrans.setOutmostContainerPreAnimationStyles');
 
 				return this.cssOutmostDiv;
 			},
 
-			resetCssOutmostDiv: function () {
+			resetCssContainers: function () {
+
 				this.$outmostContainer.css({
 					"width": "",
+					"height": "",
 					"margin-right": "",
 					"margin-left": "",
 					"min-width": "",
 					"max-width": ""
+				});
+
+				this.newView.$el.css({
+					"width": "",
+					"height": ""
 				});
 			},
 
@@ -111,18 +116,14 @@
 
 					// added wrapping divs needed
 					$page.wrap('<div class="threeDTrans-page-container" />');
-					$page.parent().wrap('<div id="threeDTrans-inner-page-container" />');
-					$page.parent().parent().wrap('<div class="threeDTrans-outer-page-container" />');
-					$page.parent().parent().parent().wrap('<div class="threeDTrans-outmost-page-container" />');
+					$page.parent().wrap('<div class="threeDTrans-outmost-page-container" />');
 				}
 
 				// save variable references
 				this.$outmostContainer = $('.threeDTrans-outmost-page-container');
-				this.$outerContainer = this.$outmostContainer.children('.threeDTrans-outer-page-container');
-				this.$innerContainer = this.$outerContainer.children('#threeDTrans-inner-page-container');
-				this.$container		= this.$innerContainer.children('.threeDTrans-page-container');
+				this.$container = this.$outmostContainer.children('.threeDTrans-page-container');
 
-				this.hasContainersNeeded = _.all([this.$outerContainer, this.$innerContainer, this.$container], function (el) {
+				this.hasContainersNeeded = _.all([this.$outmostContainer, this.$container], function (el) {
 					return $(el).size();
 				});
 			},
@@ -134,23 +135,63 @@
 				return url.replace(/\/+$/, "");
 			},
 
-			pageTransitionAnimation: function (direction, $innerContainer, $container) {
+			setPagePreAnimationStyles: function () {
 
+				var cssPages = {
+					"width" : this.cssOutmostDiv.width,
+					"height" : this.cssOutmostDiv.height
+				};
+				this.newView.$el.css(cssPages);
+				this.initialLoad || this.prevView.$el.css(cssPages);
+			},
+
+			insertNewPageBeforeAnimation: function (direction) {
+				if (direction === "backwards") {
+					this.$container.addClass('threeDTrans-page-container-' + direction);
+					this.$container.prepend(this.newView.el);
+				} else {
+					this.$container.addClass('threeDTrans-page-container-' + direction);
+					this.$container.append(this.newView.el);
+				}
+			},
+			pageTransitionAnimation: function (direction, $container) {
+
+				var cssPages,
+					pageTransitionCallback = _.bind(this.pageTransitionCallback, this);
+
+				// stop animation queues from building up
 				this.disableLinks(this.newView);
 
-				this.$outmostContainer.css(this.calculateCssOutmostDiv());
+				// fix container widths in pixels
+				this.setOutmostContainerPreAnimationStyles();
+				this.setPagePreAnimationStyles();
+
+				// add absolute positioning styles
 				this.$outmostContainer.addClass('threeDTrans');
 
-				$innerContainer.css('height', ($(window).height() - 20));
-				$innerContainer.addClass('threeDTrans-inner-page-container threeDTrans-outer-page-' + direction);
-				// this.callBackCounter = 1;
+				// insert new page
+				this.insertNewPageBeforeAnimation(direction);
+
+				// debugging
+				this.newView.$('h1').html(++this.debugCounter);
 
 				// run the animation and attach the cleanup callback to the end of the animation
-				$container.on("transitionend.threeDTrans mozTransitionEnd.threeDTrans webkitTransitionEnd.threeDTrans oTransitionEnd.threeDTrans MSTransitionEnd.threeDTrans", _.bind(this.pageTransitionCallback, this));
+				if (_($.browser).has('mozilla') && $.browser.mozilla === true) {
+					// ff uses the unprefixed version but will also fire for the other vendor prefixes
+					// > hence the need for this conditional to prevent the callback triggering multiple
+					// times for each page transition
+					$container.on("transitionend.threeDTrans", pageTransitionCallback);
+				} else {
+					$container.on("webkitTransitionEnd.threeDTrans oTransitionEnd.threeDTrans MSTransitionEnd.threeDTrans", pageTransitionCallback);
+				}
+
+				// add the animation class
 				$container.addClass('threeDTrans-animate-transform');
 				setTimeout(function () {
+					// add the translate3d classes on next-tick
 					$container.addClass('threeDTrans-animate-' + direction);
 				}, 50);
+
 				return true;
 			},
 
@@ -161,68 +202,30 @@
 
 				// prevent callback triggering twice (for each property transition change) and removing new page as well
 				if (this.callBackCounter++ === 1 && $pages.size() === 2) {
-					// to be doubly sure that this isn't performed before the end of the transition then set the timeout > the animation duration (0.7s)
-					((event.type === 'transitionend') && window.setTimeout(this.clearUpAfterTransition, 500, $container)) || this.clearUpAfterTransition($container);
+					this.clearUpAfterTransition($container);
 				}
 			},
 
 			clearUpAfterTransition: function ($container) {
 
 				$container.off(".threeDTrans");
-
 				$container.removeClass('threeDTrans-animate-transform');
-				$container.parent('#threeDTrans-inner-page-container').removeClass('threeDTrans-inner-page-container threeDTrans-outer-page-backwards threeDTrans-outer-page-forwards').css('height', '');
 
 				$container.removeClass('threeDTrans-animate-forwards threeDTrans-animate-backwards');
+
 				this.disposeView(this.prevView);
+				$container.removeClass('threeDTrans-page-container-backwards threeDTrans-page-container-forwards');
 
 				this.$outmostContainer.removeClass('threeDTrans');
-				this.resetCssOutmostDiv();
+				this.resetCssContainers();
 
-				this.trigger('threeDTrans.pageTransitionComplete');
+				this.enableLinks(this.newView);
 
 				this.callBackCounter = 0;
-				this.enableLinks(this.newView);
 				this.pageTransInProgress = false;
+				this.trigger('threeDTrans.pageTransitionComplete');
 			},
 
-
-			disposeView: function (View) {
-
-				if (!View) {
-					return false;
-				} else if (_.isFunction(View.dispose)) {
-					View.dispose();
-				} else {
-					View.unbind();
-					View.remove();
-				}
-			},
-
-			insertNewPage: {
-				'forwards': function () {
-					var self = this;
-					self.$container.append(self.newView.el);
-					return self.pageTransitionAnimation('forwards', self.$innerContainer, self.$container);
-				},
-				'backwards': function () {
-					var self = this;
-					self.$container.prepend(self.newView.el);
-					return self.pageTransitionAnimation('backwards', self.$innerContainer, self.$container);
-				},
-				// no transition needed > just straight out swap pages
-				'default': function () {
-
-					var self = this;
-
-					self.$container.html(self.newView.el);
-					self.disposeView(self.prevView);
-
-					this.pageTransInProgress = false;
-					this.callBackCounter = 0;
-					this.trigger('threeDTrans.pageTransitionComplete');
-				}
-			},
 			disableLinks: function (view) {
 				setTimeout(function () {
 					view.$('a').on('threeDTrans.click', function (event) {
@@ -231,18 +234,69 @@
 				}, 50);
 			},
 			enableLinks: function (view) {
+				// remove click delay if requested
+				if (this.fastClick !== undefined && _.isFunction(this.fastClick)) {
+					new this.fastClick(view.el);
+				}
+
 				setTimeout(function () {
 					view.$('a').off('threeDTrans.click');
 				}, 50);
 			},
+
+			unbindViewRenderCallback: function (View) {
+				View.renderCb && View.off('render', View.renderCb);
+			},
+			disposeView: function (View) {
+
+				if (!View) {
+					return false;
+				} else if (_.isFunction(View.dispose)) {
+					this.unbindViewRenderCallback(View);
+					View.dispose();
+				} else {
+					this.unbindViewRenderCallback(View);
+					View.unbind();
+					View.remove();
+				}
+			},
+
+			insertNewPageDefault: function () {
+				this.$container.html(this.newView.el);
+			},
+
+			insertNewPage: {
+				'forwards': function () {
+					var self = this;
+					return self.pageTransitionAnimation('forwards', self.$container);
+				},
+				'backwards': function () {
+					var self = this;
+					return self.pageTransitionAnimation('backwards', self.$container);
+				},
+				// no transition needed > just straight out swap pages
+				'default': function () {
+
+					this.insertNewPageDefault();
+					this.disposeView(this.prevView);
+
+					this.pageTransInProgress = false;
+					this.callBackCounter = 0;
+					this.trigger('threeDTrans.pageTransitionComplete');
+
+
+				}
+			},
+
 			csstransforms3d: function () {
 				// return ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix());
 				var el = document.createElement('p'),
 					has3d,
+					t,
 					transforms = {
 						'WebkitTransform': '-webkit-transform',
 						'OTransform': '-o-transform',
-						'MSTransform': '-ms-transform',
+						'msTransform': '-ms-transform',
 						'MozTransform': '-moz-transform',
 						'Transform': 'transform'
 					};
@@ -250,7 +304,7 @@
 				// Add it to the body to get the computed style.
 				document.body.insertBefore(el, null);
 
-				for (var t in transforms) {
+				for (t in transforms) {
 					if (el.style[t] !== undefined) {
 						el.style[t] = "translate3d(1px,1px,1px)";
 						has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
@@ -314,17 +368,19 @@
 				this.newView = (new ViewClass(viewInitOpts));
 				this.newView.hash || (this.newView.hash = this.removeTrailingSlashes(window.location.hash));
 
+
 				// 0. render the new view 1. insert new page, 2. add zero margins
 				this.newView.render(renderParams);
 				this.newView.$el.addClass('threeDTrans-no-margin-width');
 
 				// trigger page transition if not just arrived at website
-				renderCb = _.bind(function () {
+				this.newView.renderCb = _.bind(function () {
 					this.newView.$el.hasClass('threeDTrans-page') || this.newView.$el.addClass('threeDTrans-page');
 					_.bind(this.insertNewPage[this.calculateDirection(this.newView.hash, null, direction)], this)();
 				}, this);
+
 				// trigger page transition timing: wait for the view to emit the render event or call immediately
-				(this.renderCallback && this.newView.on('render', renderCb)) || renderCb();
+				(this.renderCallback && this.newView.on('render', this.newView.renderCb)) || this.newView.renderCb();
 			}
 
 		});
